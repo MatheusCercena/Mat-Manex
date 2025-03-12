@@ -1,39 +1,22 @@
 def cadastrar_receita():
-    valor = float(input('Valor: '))
-    categ = input('Categoria: ')
-    pag = input('Pagante: ')
-    obs = input('Observações: ')
+    receita = {}
+    receita['valor'] = float(input('Valor: '))
+    receita['categ'] = input('Categoria: ')
+    receita['pag'] = input('Pagante: ')
+    receita['obs'] = input('Observações: ')
 
-    ganho = {
-        'Valor' : valor,
-        'Categoria' : categ,
-        'Pagante' : pag,
-        'Observações' : obs
-    }
-
-    print('Receita cadastrada com sucesso. \n Valor: {valor}\n Categoria: {categ} \n Pagante: {pag} \n Observações: {obs}')
-    return(ganho)
+    print(f'Receita cadastrada com sucesso. \n Valor: {receita['valor']}\n Categoria: {receita['categ']} \n Pagante: {receita['pag']} \n Observações: {receita['obs']}')
+    return(receita.copy())
     
 def cadastrar_gasto():
-    valor = float(input('Valor: '))
-    categ = input('Categoria: ')
-    fav = input('Favorecido: ')
-    obs = input('Observações: ')
+    gasto = {}
+    gasto['valor'] = float(input('Valor: '))
+    gasto['categ'] = input('Categoria: ')
+    gasto['pag'] = input('Pagante: ')
+    gasto['obs'] = input('Observações: ')
 
-    gasto = {
-        'Valor' : valor,
-        'Categoria' : categ,
-        'Favorecido' : fav,
-        'Observações' : obs
-    }
-    
-    print(f'Gasto cadastrado com sucesso. \n Valor: {valor}\n Categoria: {categ} \n Favorecido: {fav} \n Observações: {obs}')
-
-    return(gasto)
-
-
+    print(f'Gasto cadastrado com sucesso. \n Valor: {gasto['valor']}\n Categoria: {gasto['categ']} \n Favorecido: {gasto['fav']} \n Observações: {gasto['obs']}')
+    return(gasto.copy())
 
 # def ver_lista():
     
-# def ver_estatisticas():
-

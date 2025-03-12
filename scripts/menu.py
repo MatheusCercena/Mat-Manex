@@ -19,27 +19,35 @@ print('Menu: \n',
 )
 opt = ''
 options = (1, 2, 3, 4, 5)
-while opt not in options :
-    try:
-        opt = int(input('Digite o número da opção: '))
-        if opt not in options:
-            print('Por favor, digite um número de 1 a 5: ')
-    except ValueError:
-        print('Por favor, digite um número de 1 a 5: ')
+while opt not in options:
+    opt = int(input('Digite o número da opção: '))
+    if opt not in options:
+        print('Opção inválida! Digite um número de 1 a 5: ')
+
+lista_de_receitas = []
+lista_de_gastos = []
 
 if opt == 1:
+    while True:
+        lista_de_receitas.append(cadastrar_receita())
+        res = input('Aperte enter para cadastrar outra receita ou qualquer outra tecla para parar.')
+        if res != '':
+            break
     cadastrar_receita()
 elif opt == 2:
-    
-    lista_de_gastos = []
-    lista_de_gastos.append(cadastrar_gasto())
-    print(*lista_de_gastos[1])
+    while True:
+        lista_de_gastos.append(cadastrar_gasto())
+        res = input('Aperte enter para cadastrar outro gasto ou qualquer outra tecla para parar.')
+        if res != '':
+            break
+elif opt == 3:
+    # ver_lista()
+    for receita in lista_de_receitas:
+        print(f'Valor: {receita['valor']} - Categoria: {receita['categ']} - Pagante: {receita['pag']} - Observações: {receita['obs']}')
+    for gasto in lista_de_gastos:
+        print(f'Valor: {gasto['valor']}\n Categoria: {gasto['categ']} \n Favorecido: {gasto['fav']} \n Observações: {gasto['obs']}')
 
-# elif opt == 3:
-#     ver_lista()
 # elif opt == 4:
 #     ver_estatisticas()
-elif opt == 5:
-    sys.exit   
 else:
-    print('Por favor, digite um número de 1 a 5.')
+    sys.exit   
