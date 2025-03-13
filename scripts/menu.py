@@ -1,6 +1,7 @@
 from time import localtime
 import sys
 from menu_functions import cadastrar_transação
+from keyboard import is_pressed
 
 hour = localtime().tm_hour 
 if hour < 5 or hour >= 18:
@@ -30,13 +31,15 @@ lista_de_transações = []
 if opt == 1:
     while True:
         lista_de_transações.append(cadastrar_transação(0))
+        lista_de_transações[-1]['id'] = len(lista_de_transações)
         res = input('Aperte enter para cadastrar outra receita ou qualquer outra tecla para parar.')
         if res != '':
             break
 elif opt == 2:
     while True:
         lista_de_transações.append(cadastrar_transação(1))
-        res = input('Aperte enter para cadastrar outro gasto ou qualquer outra tecla para parar.')
+        lista_de_transações[-1]['id'] = len(lista_de_transações)
+        res = input('Aperte enter para cadastrar outro gasto ou esc para parar.')
         if res != '':
             break
 # elif opt == 3:
@@ -48,6 +51,7 @@ else:
     sys.exit   
 
 print('Lista de transações')
+print(lista_de_transações)
 
-for transação in lista_de_transações:
-    print(f'Tipo: {transação['tipo']} \nData: {transação['data']} \nValor: {transação['valor']} \nCategoria: {transação['categ']} \nFavorecido: {transação['orig']} \nObservações: {transação['obs']}')
+# for transação in lista_de_transações:
+#     print(f'ID: {transação['id']} \nTipo: {transação['tipo']} \nData: {transação['data']} \nValor: {transação['valor']} \nCategoria: {transação['categ']} \nFavorecido: {transação['orig']} \nObservações: {transação['obs']}')
