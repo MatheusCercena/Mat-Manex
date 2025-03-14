@@ -1,4 +1,14 @@
 from datetime import date
+from time import localtime
+
+def saudacao():
+    hour = localtime().tm_hour 
+    if hour < 5 or hour >= 18:
+        return print('Boa noite \n')
+    if 5 <= hour < 12: 
+        return print('Bom dia \n')
+    if 12 <= hour < 18:
+        return print('Boa tarde \n')
 
 def menu():
     print('Menu: \n', '[1] Cadastrar receita \n', '[2] Cadastrar gasto \n', '[3] Ver lista  \n', '[4] Ver estatísticas \n', '[5] Sair do programa \n')
@@ -38,6 +48,3 @@ def cadastrar_transação(a):
         print('Gasto cadastrado com sucesso.')
     return(transação.copy())
 
-# def ver_lista():
-#   for transação in lista_de_transações:
-#       print(f'ID: {transação['id']} \nTipo: {transação['tipo']} \nData: {transação['data']} \nValor: {transação['valor']} \nCategoria: {transação['categ']} \nFavorecido: {transação['orig']} \nObservações: {transação['obs']}')
