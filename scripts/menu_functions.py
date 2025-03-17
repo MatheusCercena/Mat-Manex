@@ -48,3 +48,9 @@ def cadastrar_transação(a):
         print('Gasto cadastrado com sucesso.')
     return(transação.copy())
 
+def validar_data():
+    print('a ser feito')
+def validar_float():
+    print('a ser feito')
+def limite_de_caracteres(expressao, limite):
+        print('a ser feito')
