@@ -1,5 +1,7 @@
 from menu_functions import saudacao, menu, cadastrar_transação
 import sys
+import json
+import os
 
 def selecionar_acao(menu_opt):
     if menu_opt == 1:
@@ -22,13 +24,24 @@ def selecionar_acao(menu_opt):
                 print(f'ID: {transação['id']:3} Tipo: {transação['tipo']:10} Data: {transação['data']:15} Valor: {transação['valor']:8} Categoria: {transação['categ']:20} Favorecido: {transação['orig']:20} \nObservações: {transação['obs']:20}')
         ver_lista()
     else:
+        def salvar_transações():
+            with open("data.json", "w") as file:
+                json.dump(data, file)
         sys.exit   
 
 saudacao()
 
 menu_opt = menu()
-lista_de_transações = []
+data_json = 'data.json'
+if os.path.exists(data_json, "r"):
+    try:
+        with open(data_json, "r") as file:
+            lista_de_transações = json.load(file)
+    except json.JSONDecodeError:
+        lista_de_transações = []
+
 
 while True:
     selecionar_acao(menu_opt)
     menu_opt = menu()
+
