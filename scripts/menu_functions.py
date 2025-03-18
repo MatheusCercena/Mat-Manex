@@ -1,4 +1,5 @@
 from datetime import date
+from datetime import datetime
 from time import localtime
 
 def saudacao():
@@ -22,14 +23,11 @@ def menu():
     return opt
 
 def cadastrar_transação(a):
-    data_padrao = date.today().strftime('%d/%m/%Y')
     transação = {}
     if a == 0:
         transação['id'] = ''
-        transação['tipo'] = 'recebimento'
-        transação['data'] = input(f'Data (tecle enter para data de hoje): ')
-        if not transação['data']:
-            transação['data'] == data_padrao
+        transação['tipo'] = 'Recebimento'
+        transação['data'] = validar_data(input(f'Data (tecle enter para data de hoje): '))
         transação['valor'] = float(input('Valor: '))
         transação['categ'] = input('Categoria: ')
         transação['orig'] = input('Pagante: ')
@@ -37,10 +35,8 @@ def cadastrar_transação(a):
         print('Receita cadastrada com sucesso.')
     if a == 1:
         transação['id'] = ''
-        transação['tipo'] = 'pagamento'
-        transação['data'] = input(f'Data (tecle enter para data de hoje): ')
-        if not transação['data']:
-            transação['data'] = data_padrao
+        transação['tipo'] = 'Pagamento'
+        transação['data'] = validar_data(input(f'Data (tecle enter para data de hoje): '))
         transação['valor'] = float(input('Valor: '))
         transação['categ'] = input('Categoria: ')
         transação['orig'] = input('Favorecido: ')
@@ -48,9 +44,25 @@ def cadastrar_transação(a):
         print('Gasto cadastrado com sucesso.')
     return(transação.copy())
 
-def validar_data():
-    print('a ser feito')
+def validar_data(data):
+    data_padrao = date.today().strftime('%d/%m/%Y')
+    ano_atual = date.today().year
+    if not data:
+        return data_padrao
+    formats = ['%d/%m/%Y', '%d %m %Y', '%d-%m-%Y', '%d.%m.%Y', '%d%m%Y', '%d/%m/%y', '%d %m %y', '%d-%m-%y', '%d.%m.%y', '%d%m%y', '%d/%m', '%d %m', '%d-%m', '%d.%m', '%d%m']
+    for formato in formats:
+        try:
+            data_obj = datetime.strptime(data.strip(), formato)
+            if formato in ['%d/%m', '%d %m', '%d-%m', '%d.%m', '%d%m']:
+                data_obj = data_obj.replace(year=ano_atual)
+            return data_obj.strftime('%d/%m/%Y')
+        except ValueError:
+            continue
+    print('Data inválida.')
+    return data_padrao
+
 def validar_float():
     print('a ser feito')
 def limite_de_caracteres(expressao, limite):
         print('a ser feito')
+

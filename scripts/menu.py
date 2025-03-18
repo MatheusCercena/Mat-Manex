@@ -14,13 +14,17 @@ def selecionar_acao(menu_opt):
         while True:
             lista_de_transações.append(cadastrar_transação(1))
             lista_de_transações[-1]['id'] = len(lista_de_transações)
-            res = input('Aperte enter para cadastrar outro gasto ou esc para parar.')
+            res = input('Aperte enter para cadastrar outro gasto ou qualquer outra tecla para parar.')
             if res != '':
                 break
     elif menu_opt == 3:
         def ver_lista():
+            print()
+            print('Lista de transações: ')
+            print()
             for transação in lista_de_transações:
-                print(f'ID: {transação['id']:3} Tipo: {transação['tipo']:10} Data: {transação['data']:15} Valor: {transação['valor']:8} Categoria: {transação['categ']:20} Favorecido: {transação['orig']:20} \nObservações: {transação['obs']:20}')
+                print(f'ID: {transação['id']:3} Tipo: {transação['tipo']:10} Data: {transação['data']:11} Valor: {transação['valor']:8} Categoria: {transação['categ']:20} Favorecido: {transação['orig']:20} \nObservações: {transação['obs']:20}')
+                print('- '*20)
         ver_lista()
 
 def salvar_transações():
@@ -45,3 +49,4 @@ while True:
         sys.exit()   
 
 
+#cadastrar função para mostrar saldo atual
