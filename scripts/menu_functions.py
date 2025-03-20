@@ -28,7 +28,7 @@ def cadastrar_transação(a):
         transação['id'] = ''
         transação['tipo'] = 'Recebimento'
         transação['data'] = validar_data(input(f'Data (tecle enter para data de hoje): '))
-        transação['valor'] = float(input('Valor: '))
+        transação['valor'] = validar_float(input('Valor: '))
         transação['categ'] = input('Categoria: ')
         transação['orig'] = input('Pagante: ')
         transação['obs'] = input('Observações: ')
@@ -37,7 +37,7 @@ def cadastrar_transação(a):
         transação['id'] = ''
         transação['tipo'] = 'Pagamento'
         transação['data'] = validar_data(input(f'Data (tecle enter para data de hoje): '))
-        transação['valor'] = float(input('Valor: '))
+        transação['valor'] = validar_float(input('Valor: '))
         transação['categ'] = input('Categoria: ')
         transação['orig'] = input('Favorecido: ')
         transação['obs'] = input('Observações: ')
@@ -61,8 +61,14 @@ def validar_data(data):
     print('Data inválida.')
     return data_padrao
 
-def validar_float():
-    print('a ser feito')
+def validar_float(n):
+    while True: 
+        try:
+            float(n.replace(",", "."))
+            return n
+        except:
+            print('Valor inválido')
+
 def limite_de_caracteres(expressao, limite):
         print('a ser feito')
 
