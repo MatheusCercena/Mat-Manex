@@ -26,6 +26,18 @@ def selecionar_acao(menu_opt):
                 print(f'ID: {transação['id']:3} Tipo: {transação['tipo']:10} Data: {transação['data']:11} Valor: {transação['valor']:8} Categoria: {transação['categ']:20} Favorecido: {transação['orig']:20} \nObservações: {transação['obs']:20}')
                 print('- '*20)
         ver_lista()
+    elif menu_opt == 4:
+        options2 = [1, 2, 3]
+        while True:
+            opt2 = input('1 - Ver saldo: \n2 - Categorias \n3 - Favorecidos \n Digite o número da opção: ')
+            if opt2 in options2:
+                continue
+            else:
+                break
+        if opt2 == 1:
+            for i, v in enumerate(lista_de_transações):
+                print(lista_de_transações[i]['id'][v])
+        #def ver_estatisticas():
 
 def salvar_transações():
     with open(arquivo_json, "w") as file:
