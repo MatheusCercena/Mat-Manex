@@ -1,1 +1,1 @@
-[{"id": 1, "tipo": "pagamento", "data": "10/02/2025", "valor": 100.0, "categ": "Supermercado", "orig": "Koch", "obs": "Carne"}]
+[{"id": 1, "tipo": "Recebimento", "data": "23/03/2025", "valor": 350.0, "categoria": "Sal\u00e1rio", "origem": "Versateel", "obs": ""}, {"id": 2, "tipo": "Recebimento", "data": "23/03/2025", "valor": 350.0, "categoria": "Sal\u00e1rio", "origem": "Versattel", "obs": ""}, {"id": 3, "tipo": "Pagamento", "data": "23/03/2025", "valor": -100.0, "categoria": "Supermercado", "origem": "Koch", "obs": ""}]

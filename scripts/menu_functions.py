@@ -5,15 +5,14 @@ from time import localtime
 def saudacao():
     hour = localtime().tm_hour 
     if hour < 5 or hour >= 18:
-        return print('Boa noite \n')
+        return print('Boa noite')
     if 5 <= hour < 12: 
-        return print('Bom dia \n')
+        return print('Bom dia')
     if 12 <= hour < 18:
-        return print('Boa tarde \n')
+        return print('Boa tarde')
 
 def menu():
-    print('Menu: \n', '[1] Cadastrar receita \n', '[2] Cadastrar gasto \n', '[3] Ver lista  \n', '[4] Ver estatísticas \n', '[5] Sair do programa \n')
-    global opt 
+    print('\nMenu: \n', '[1] Cadastrar receita \n', '[2] Cadastrar gasto \n', '[3] Ver lista  \n', '[4] Ver estatísticas \n', '[5] Sair do programa \n')
     opt = ''
     options = (1, 2, 3, 4, 5)
     while opt not in options:
@@ -29,17 +28,17 @@ def cadastrar_transação(a):
         transação['tipo'] = 'Recebimento'
         transação['data'] = validar_data(input(f'Data (tecle enter para data de hoje): '))
         transação['valor'] = solicitar_float('Valor: ')
-        transação['categ'] = input('Categoria: ')
-        transação['orig'] = input('Pagante: ')
+        transação['categoria'] = input('Categoria: ')
+        transação['origem'] = input('Pagante: ')
         transação['obs'] = input('Observações: ')
         print('Receita cadastrada com sucesso.')
     if a == 1:
         transação['id'] = ''
         transação['tipo'] = 'Pagamento'
         transação['data'] = validar_data(input(f'Data (tecle enter para data de hoje): '))
-        transação['valor'] = solicitar_float('Valor: ')
-        transação['categ'] = input('Categoria: ')
-        transação['orig'] = input('Favorecido: ')
+        transação['valor'] = -abs(solicitar_float('Valor: '))
+        transação['categoria'] = input('Categoria: ')
+        transação['origem'] = input('Favorecido: ')
         transação['obs'] = input('Observações: ')
         print('Gasto cadastrado com sucesso.')
     return(transação.copy())
@@ -66,10 +65,17 @@ def solicitar_float(mensagem):
         n = input(mensagem.strip())
         try:
             float(n.replace(",", "."))
-            return n
+            return float(n)
         except:
             print('Valor inválido')
 
-def limite_de_caracteres(expressao, limite):
-        print('a ser feito')
-
+def ver_lista(lista):
+    print()
+    print('Lista de transações: ')
+    print()
+    for transação in lista:
+        print(f'ID: {transação['id']:3} Tipo: {transação['tipo']:10} Data: {transação['data']:11} Valor: {transação['valor']:8} Categoria: {transação['categoria']:20} Favorecido: {transação['origem']:20} \nObservações: {transação['obs']:20}')
+        separador()
+        
+def separador():
+    print('- '*20)
