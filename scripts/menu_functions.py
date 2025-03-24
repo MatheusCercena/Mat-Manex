@@ -5,21 +5,11 @@ from time import localtime
 def saudacao():
     hour = localtime().tm_hour 
     if hour < 5 or hour >= 18:
-        return print('Boa noite')
+        print('Boa noite')
     if 5 <= hour < 12: 
-        return print('Bom dia')
+        print('Bom dia')
     if 12 <= hour < 18:
-        return print('Boa tarde')
-
-def menu():
-    print('\nMenu: \n', '[1] Cadastrar receita \n', '[2] Cadastrar gasto \n', '[3] Ver lista  \n', '[4] Ver estatísticas \n', '[5] Sair do programa \n')
-    opt = ''
-    options = (1, 2, 3, 4, 5)
-    while opt not in options:
-        opt = int(input('Digite o número da opção: '))
-        if opt not in options:
-            print('Opção inválida! Digite um número de 1 a 5: ')
-    return opt
+        print('Boa tarde')
 
 def cadastrar_transação(a):
     transação = {}

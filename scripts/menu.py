@@ -1,4 +1,4 @@
-from menu_functions import saudacao, menu, cadastrar_transação, ver_lista, separador
+from menu_functions import saudacao, cadastrar_transação, ver_lista, separador
 import sys
 import json
 
@@ -12,12 +12,18 @@ def carregar_json():
     except:
         lista_de_transações = []
 
-def menu_principal(opção):
+def menu_principal():
     while True:
-        selecionar_acao(opção)
-        opção = menu()
+        print('\nMenu: \n', '[1] Cadastrar receita \n', '[2] Cadastrar gasto \n', '[3] Ver lista  \n', '[4] Ver estatísticas \n', '[5] Sair do programa \n')
+        opt = ''
+        options = (1, 2, 3, 4, 5)
+        while opt not in options:
+            opt = int(input('Digite o número da opção: '))
+            if opt not in options:
+                print('Opção inválida! Digite um número de 1 a 5: ')
+        realizar_acao(opt)
 
-def selecionar_acao(opção):
+def realizar_acao(opção):
     if opção == 1:
         while True:
             lista_de_transações.append(cadastrar_transação(0))
@@ -63,7 +69,7 @@ def selecionar_acao(opção):
                 separador()
             elif opt2 == 4:
                 break
-        menu_principal(menu())
+        menu_principal()
     if opção == 5:
         salvar_transações()
         sys.exit()   
@@ -75,10 +81,10 @@ def salvar_transações():
 
 carregar_json()
 saudacao()
-menu_principal(menu())
+menu_principal()
 
 #Coisas para adicionar
 #Alterar transações: Apagar uma transação específica, ou alterar algo nela.
 #Fazer após mecher com PyQT
-
+#https://www.riverbankcomputing.com/static/Docs/PyQt6/module_index.html e https://www.riverbankcomputing.com/static/Docs/PyQt6/api/qtwidgets/qtwidgets-module.html
 
