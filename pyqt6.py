@@ -11,7 +11,9 @@ window.show()
 app.exec()
 
 #manha min 5:00 https://youtu.be/SelawmXHtPg?list=PL3JVwFmb_BnSOj_OtnKlsc2c7Jcs6boyB&t=299
-#meio-dia: 
+#meio-dia: video 3 https://www.youtube.com/watch?v=tJQk57qcliA&list=PLwsAoT89dh3qnjwQ1lJYzauTsFj9e8Qho&index=3
+
+
 
 
 
