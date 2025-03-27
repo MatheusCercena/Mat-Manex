@@ -15,7 +15,7 @@ def cadastrar_transação(a):
     transação = {}
     if a == 0:
         transação['id'] = ''
-        transação['tipo'] = 'Recebimento'
+        transação['tipo'] = 'Receita'
         transação['data'] = validar_data(input(f'Data (tecle enter para data de hoje): '))
         transação['valor'] = solicitar_float('Valor: ')
         transação['categoria'] = input('Categoria: ')
@@ -24,13 +24,13 @@ def cadastrar_transação(a):
         print('Receita cadastrada com sucesso.')
     if a == 1:
         transação['id'] = ''
-        transação['tipo'] = 'Pagamento'
+        transação['tipo'] = 'Despesa'
         transação['data'] = validar_data(input(f'Data (tecle enter para data de hoje): '))
         transação['valor'] = -abs(solicitar_float('Valor: '))
         transação['categoria'] = input('Categoria: ')
         transação['origem'] = input('Favorecido: ')
         transação['obs'] = input('Observações: ')
-        print('Gasto cadastrado com sucesso.')
+        print('Despesa cadastrada com sucesso.')
     return(transação.copy())
 
 def validar_data(data):

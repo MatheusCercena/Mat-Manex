@@ -14,7 +14,7 @@ def carregar_json():
 
 def menu_principal():
     while True:
-        print('\nMenu: \n', '[1] Cadastrar receita \n', '[2] Cadastrar gasto \n', '[3] Ver lista  \n', '[4] Ver estatísticas \n', '[5] Sair do programa \n')
+        print('\nMenu: \n', '[1] Cadastrar receita \n', '[2] Cadastrar despesa \n', '[3] Ver lista  \n', '[4] Ver estatísticas \n', '[5] Sair do programa \n')
         opt = ''
         options = (1, 2, 3, 4, 5)
         while opt not in options:
@@ -35,7 +35,7 @@ def realizar_acao(opção):
         while True:
             lista_de_transações.append(cadastrar_transação(1))
             lista_de_transações[-1]['id'] = len(lista_de_transações)
-            res = input('Aperte enter para cadastrar outro gasto ou qualquer outra tecla para parar.')
+            res = input('Aperte enter para cadastrar outra despesa ou qualquer outra tecla para parar.')
             if res != '':
                 break
     elif opção == 3:
