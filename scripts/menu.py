@@ -5,16 +5,23 @@ import json
 def carregar_json():
     global arquivo_json
     arquivo_json = 'data.json'
+    global lista_de_transações
     try:
         with open(arquivo_json, "r") as file:
-            global lista_de_transações
+            
             lista_de_transações = json.load(file)
     except:
         lista_de_transações = []
 
 def menu_principal():
     while True:
-        print('\nMenu: \n', '[1] Cadastrar receita \n', '[2] Cadastrar despesa \n', '[3] Ver lista  \n', '[4] Ver estatísticas \n', '[5] Sair do programa \n')
+        print('''\nMenu: 
+              [1] Cadastrar receita 
+              [2] Cadastrar despesa 
+              [3] Ver lista 
+              [4] Ver estatísticas 
+              [5] Sair do programa
+              ''')
         opt = ''
         options = (1, 2, 3, 4, 5)
         while opt not in options:
@@ -24,6 +31,7 @@ def menu_principal():
         realizar_acao(opt)
 
 def realizar_acao(opção):
+    global lista_de_transações
     if opção == 1:
         while True:
             lista_de_transações.append(cadastrar_transação(0))
@@ -79,9 +87,12 @@ def salvar_transações():
     with open(arquivo_json, "w") as file:
         json.dump(lista_de_transações, file)
 
-carregar_json()
-saudacao()
-menu_principal()
+lista_de_transações = [] 
+
+if __name__ == "__main__":
+    carregar_json()
+    saudacao()
+    menu_principal()
 
 #Coisas para adicionar
 #Alterar transações: Apagar uma transação específica, ou alterar algo nela.
