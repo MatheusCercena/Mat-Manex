@@ -45,6 +45,8 @@ btn_config.setGeometry(1000, 0, 100, 100)
 btn_config.clicked.connect(f1)
 
 
+
+
 #25/03 manha min 5:00 https://youtu.be/SelawmXHtPg?list=PL3JVwFmb_BnSOj_OtnKlsc2c7Jcs6boyB&t=299
 #25/03 meio-dia: video 3 https://www.youtube.com/watch?v=tJQk57qcliA&list=PLwsAoT89dh3qnjwQ1lJYzauTsFj9e8Qho&index=3
 #27/03 manha - vendo a começando a aplicar video 3, continuar design da home antes de ir para 4.
