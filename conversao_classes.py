@@ -60,9 +60,7 @@ class Cadastro:
         try:
             with open(self.arquivo_json, "r") as file:
                 transações = json.load(file)
-                for t in transações:
-                    return Transação(**t) 
-                        
+            return [Transação(**t) for t in transações]  # Retorna uma lista de objetos Transação por passar os elementos do dicionario t como parametros da funcao                   
         except (FileNotFoundError, json.JSONDecodeError):
             return []
 
@@ -85,6 +83,26 @@ class Cadastro:
 
     def ver_lista(self):
         print('\nLista de transações: \n')
-        print()
         for transação in self.lista_de_transações:
-            print(f'ID: {transação.id:3} Tipo: {transação['tipo']:10} Data: {transação['data']:11} Valor: {transação['valor']:8} Categoria: {transação['categoria']:20} Favorecido: {transação['origem']:20} \nObservações: {transação['obs']:20}')
+            print(f'ID: {transação.id} | {transação.tipo} | {transação.data} | R${transação.valor:.2f} | {transação.categoria} | {transação.origem} | {transação.observaçoes}')
+
+    def ver_saldo(self):
+        saldo = 0
+        for transação in self.lista_de_transações:
+            saldo += float(transação.valor)
+            Cadastro.separador()
+        print(f"Saldo atual: {saldo:.2f}")
+
+    def ver_categorias(self):
+        categorias = []
+        contador = 0
+        print('\nCategorias: \n')
+        for transação in self.lista_de_transações:
+            if transação.categoria not in categorias:
+                categorias.append(transação.categoria)
+                contador += 1
+                print(f'[{contador}] {transação.categoria}')
+
+    @staticmethod
+    def separador():
+        print('- '*20)  
