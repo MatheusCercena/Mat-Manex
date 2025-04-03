@@ -1,6 +1,6 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton
-from menu import realizar_acao
+from scripts.menu import realizar_acao
 
 def f1():
     print("Função em desenvolvimento")

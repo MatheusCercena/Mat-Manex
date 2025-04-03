@@ -9,4 +9,8 @@ main_window.show()
 app.exec()
 
 
+# if __name__ == "__main__":
+#     Menu.saudacao()
+#     menu = Menu()
+#     menu.ver_menu_principal()
 

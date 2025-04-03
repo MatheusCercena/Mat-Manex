@@ -1,101 +1,65 @@
-from menu_functions import saudacao, cadastrar_transação, ver_lista, separador
 import sys
-import json
+from time import localtime
+from gerenciador import GerenciadorFinanças
 
-def carregar_json():
-    global arquivo_json
-    arquivo_json = 'data.json'
-    global lista_de_transações
-    try:
-        with open(arquivo_json, "r") as file:
-            
-            lista_de_transações = json.load(file)
-    except:
-        lista_de_transações = []
 
-def menu_principal():
-    while True:
-        print('''\nMenu: 
-              [1] Cadastrar receita 
-              [2] Cadastrar despesa 
-              [3] Ver lista 
-              [4] Ver estatísticas 
-              [5] Sair do programa
-              ''')
-        opt = ''
-        options = (1, 2, 3, 4, 5)
-        while opt not in options:
-            opt = int(input('Digite o número da opção: '))
-            if opt not in options:
-                print('Opção inválida! Digite um número de 1 a 5: ')
-        realizar_acao(opt)
+class Menu:
+    def __init__(self):
+        self.gerenciador = GerenciadorFinanças()
 
-def realizar_acao(opção):
-    global lista_de_transações
-    if opção == 1:
+    def ver_menu_principal(self):
         while True:
-            lista_de_transações.append(cadastrar_transação(0))
-            lista_de_transações[-1]['id'] = len(lista_de_transações)
-            res = input('Aperte enter para cadastrar outra receita ou qualquer outra tecla para parar.')
-            if res != '':
-                break
-    elif opção == 2:
+            print('''\nMenu: 
+                [1] Cadastrar receita 
+                [2] Cadastrar despesa 
+                [3] Ver lista 
+                [4] Ver estatísticas 
+                [5] Sair do programa
+                ''')
+            opt = ''
+            options = (1, 2, 3, 4, 5)
+            while opt not in options:
+                opt = int(input('Digite o número da opção: '))
+                if opt not in options:
+                    print('Opção inválida! Digite um número de 1 a 5: ')
+            if opt == 1:
+                self.gerenciador.cadastrar_transação('Recebimento')
+            elif opt == 2:
+                self.gerenciador.cadastrar_transação('Pagamento')
+            elif opt == 3:
+                self.gerenciador.ver_lista()
+            elif opt == 4:
+                self.sub_menuEstatisticas()
+            elif opt == 5:
+                sys.exit()
+    def sub_menuEstatisticas(self):
         while True:
-            lista_de_transações.append(cadastrar_transação(1))
-            lista_de_transações[-1]['id'] = len(lista_de_transações)
-            res = input('Aperte enter para cadastrar outra despesa ou qualquer outra tecla para parar.')
-            if res != '':
-                break
-    elif opção == 3:
-        if len(lista_de_transações) > 0:
-            ver_lista(lista_de_transações)
-        else:
-            print('\nVocê não cadastrou nenhuma transação.')
-    elif opção == 4:
-        options2 = [1, 2, 3, 4]
-        while True:
-            while True:
-                opt2 = int(input('\nMenu - Estatísticas: \n [1] Ver saldo: \n [2] Categorias \n [3] Favorecidos \n [4] Voltar ao menu principal \n Digite o número da opção: '))
-                if opt2 not in options2:
-                    print("Digite um número válido!")
-                else: 
-                    break
-            if opt2 == 1:
-                saldo = 0
-                for c in lista_de_transações:
-                    saldo += float(c['valor'])
-                print(f"Saldo atual: {saldo:.2f}")
-            elif opt2 == 2:
-                categorias = []
-                contador = 0
-                print('\nCategorias: \n')
-                for transação in lista_de_transações:
-                    if transação['categoria'] not in categorias:
-                        categorias.append(transação['categoria'])
-                        contador += 1
-                        print(f'[{contador}] {transação['categoria']}')
-                separador()
-            elif opt2 == 4:
-                break
-        menu_principal()
-    if opção == 5:
-        salvar_transações()
-        sys.exit()   
-    salvar_transações()
+            options2 = [1, 2, 3, 4]
+            print('''\nMenu Estatísticas: 
+            [1] Ver saldo: 
+            [2] Categorias 
+            [3] Favorecidos/Pagantes
+            [4] Voltar ao menu principal
+            ''')
+            opt_estatisticas = int(input('\nDigite o número da opção: '))
+            while opt_estatisticas not in options2:
+                opt_estatisticas = int(input('\nNúmero inválido. \nDigite o número da opção: '))
+            if opt_estatisticas == 1:
+                self.gerenciador.ver_saldo()
+            elif opt_estatisticas == 2:
+                self.gerenciador.ver_categorias()
+            elif opt_estatisticas == 3:
+                self.gerenciador.ver_origens()
+            elif opt_estatisticas == 4:
+                self.ver_menu_principal()
 
-def salvar_transações():
-    with open(arquivo_json, "w") as file:
-        json.dump(lista_de_transações, file)
-
-lista_de_transações = [] 
-
-if __name__ == "__main__":
-    carregar_json()
-    saudacao()
-    menu_principal()
-
-#Coisas para adicionar
-#Alterar transações: Apagar uma transação específica, ou alterar algo nela.
-#Fazer após mecher com PyQT
-#https://www.riverbankcomputing.com/static/Docs/PyQt6/module_index.html e https://www.riverbankcomputing.com/static/Docs/PyQt6/api/qtwidgets/qtwidgets-module.html
+    @staticmethod
+    def saudacao():
+        hour = localtime().tm_hour 
+        if hour < 5 or hour >= 18:
+            print('Boa noite')
+        if 5 <= hour < 12: 
+            print('Bom dia')
+        if 12 <= hour < 18:
+            print('Boa tarde')
 

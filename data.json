@@ -1,1 +1,1 @@
-[{"id": 1, "tipo": "Despesa", "data": "01/04/2025", "valor": -100.0, "categoria": "Casa", "origem": "Celesc", "obs": "Mes mar\u00e7o"}]
+[{"id": 1, "tipo": "Recebimento", "data": "02/04/2025", "valor": 350.0, "categoria": "Salario", "origem": "Versateel", "observa\u00e7oes": "TRTs"}, {"id": 2, "tipo": "Pagamento", "data": "10/03/2025", "valor": -100.0, "categoria": "Supermercado", "origem": "Koch", "observa\u00e7oes": "Carne"}, {"id": 3, "tipo": "Pagamento", "data": "02/04/2025", "valor": -150.0, "categoria": "Supermercado", "origem": "Fort", "observa\u00e7oes": ""}]
