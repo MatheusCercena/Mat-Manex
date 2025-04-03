@@ -32,6 +32,7 @@ class Menu:
                 self.sub_menuEstatisticas()
             elif opt == 5:
                 sys.exit()
+                
     def sub_menuEstatisticas(self):
         while True:
             options2 = [1, 2, 3, 4]
