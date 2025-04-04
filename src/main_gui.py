@@ -1,15 +1,16 @@
-import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QPushButton
+from PyQt6.QtWidgets import QWidget, QPushButton
 from gerenciador import GerenciadorFinanças
 from menu import Menu
+from modal_cadastro import ModalCadastro
 
 def f1():
     print("Função em desenvolvimento")
 
-app = QApplication(sys.argv)
-
 gerenciador = GerenciadorFinanças()
 menu = Menu()
+
+
+
 
 #Começo do menu
 main_window = QWidget()
@@ -18,15 +19,15 @@ main_window.setWindowTitle('Mat-Manex')
 
 btn_inicio = QPushButton('Início', main_window)
 btn_inicio.setGeometry(0, 0, 100, 100)
-btn_inicio.clicked.connect(lambda: menu.ver_menu_principal)
+btn_inicio.clicked.connect(lambda: menu.ver_menu_principal())
 
 btn_cad_rec = QPushButton('Cadastrar receita', main_window)
 btn_cad_rec.setGeometry(100, 0, 150, 100)
-btn_cad_rec.clicked.connect(lambda: gerenciador.cadastrar_transação('Recebimento'))
+btn_cad_rec.clicked.connect(lambda: ModalCadastro('Recebimento', gerenciador).exec())
 
 btn_cad_desp = QPushButton('Cadastrar despesa', main_window)
 btn_cad_desp.setGeometry(250, 0, 150, 100)
-btn_cad_desp.clicked.connect(lambda: gerenciador.cadastrar_transação('Recebimento'))
+btn_cad_desp.clicked.connect(lambda: ModalCadastro('Pagamento', gerenciador).exec())
 
 btn_categ = QPushButton('Categorias', main_window)
 btn_categ.setGeometry(400, 0, 150, 100)

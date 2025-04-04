@@ -17,19 +17,18 @@ class GerenciadorFinanças:
     def salvar_transações(self):
         with open(self.arquivo_json, "w") as file:
             json.dump([t.to_dict() for t in self.lista_de_transações], file)
+    # def cadastrar_transação(self, tipo):
+    #     data = input('Data (Enter para hoje): ')
+    #     valor = input('Valor: ')
+    #     categoria = input('Categoria: ')
+    #     origem = input('Pagante/Favorecido: ')
+    #     observacoes = input('Observações: ')
 
-    def cadastrar_transação(self, tipo):
-        data = input('Data (Enter para hoje): ')
-        valor = input('Valor: ')
-        categoria = input('Categoria: ')
-        origem = input('Pagante/Favorecido: ')
-        observacoes = input('Observações: ')
-
-        transação = Transação(tipo, data, valor, categoria, origem, observacoes)
-        transação.id = len(self.lista_de_transações) + 1
-        self.lista_de_transações.append(transação)
-        self.salvar_transações()
-        print(f'{tipo} cadastrado com sucesso!')
+    #     transação = Transação(tipo, data, valor, categoria, origem, observacoes)
+    #     transação.id = len(self.lista_de_transações) + 1
+    #     self.lista_de_transações.append(transação)
+    #     self.salvar_transações()
+    #     print(f'{tipo} cadastrado com sucesso!')
 
     def ver_lista(self):
         print('\nLista de transações: \n')

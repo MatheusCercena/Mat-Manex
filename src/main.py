@@ -1,12 +1,13 @@
 import sys
 from PyQt6.QtWidgets import QApplication 
-from main_gui import main_window
 
 app = QApplication(sys.argv)
 
+from main_gui import main_window
+
 main_window.show()
 
-app.exec()
+sys.exit(app.exec())
 
 
 # if __name__ == "__main__":

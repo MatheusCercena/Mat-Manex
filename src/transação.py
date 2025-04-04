@@ -41,10 +41,10 @@ class Transação:
 
     @staticmethod
     def validar_float(valor, tipo):
-            try:
-                if tipo == 'Pagamento':
-                    return -abs(float(str(valor).replace(",", ".")))
-                else:
-                    return float(str(valor).replace(",", "."))
-            except:
-                print('Valor inválido')
+        try:
+            if tipo == 'Pagamento':
+                return -abs(float(str(valor).replace(",", ".")))
+            else:
+                return float(str(valor).replace(",", "."))
+        except:
+            return 0.0
