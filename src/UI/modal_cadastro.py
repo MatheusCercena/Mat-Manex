@@ -1,29 +1,24 @@
-from PyQt6.QtWidgets import QApplication, QDialog, QLineEdit, QVBoxLayout, QLabel, QWidget, QPushButton
-from gerenciador import GerenciadorFinanças
-from transação import  Transação
-import sys
+from PyQt6.QtWidgets import QDialog, QLineEdit, QVBoxLayout, QLabel, QPushButton
+from utils.transação import Transação
 
 class ModalCadastro(QDialog):
     def __init__(self, tipo, gerenciador):
-        super().__init__()  
-        print('ha')
+        super().__init__()
         self.gerenciador = gerenciador
-        print('ha')
+        self.tipo = tipo
 
         self.setWindowTitle(f'Cadastrar {tipo}')
         self.setModal(True)
-        print('ha')
-        self.tipo = tipo
+        self.setGeometry(0, 0, 1000, 800)
+
         self.input_data = QLineEdit(self)
         self.input_valor = QLineEdit(self)
         self.input_categoria = QLineEdit(self)
         self.input_origem = QLineEdit(self)
         self.input_observacoes = QLineEdit(self)
-        print('ha')
 
         btn_confirmar = QPushButton("Cadastrar", self)
         btn_confirmar.clicked.connect(self.cadastrar_transação)
-        print('ha')
 
         layout = QVBoxLayout()
         layout.addWidget(QLabel('Data (Enter para hoje): '))
@@ -37,10 +32,9 @@ class ModalCadastro(QDialog):
         layout.addWidget(QLabel("Observações:"))
         layout.addWidget(self.input_observacoes)
         layout.addWidget(btn_confirmar)
-        print('ha')
 
-        self.setLayout(layout)  
-    
+        self.setLayout(layout)
+
     def cadastrar_transação(self):
         tipo = self.tipo
         data = self.input_data.text()
@@ -50,10 +44,18 @@ class ModalCadastro(QDialog):
         observacoes = self.input_observacoes.text()
 
         transação = Transação(tipo, data, valor, categoria, origem, observacoes)
-        print('hum')
         transação.id = len(self.gerenciador.lista_de_transações) + 1
         self.gerenciador.lista_de_transações.append(transação)
         self.gerenciador.salvar_transações()
         print(f'{tipo} cadastrado com sucesso!')
         self.accept()
+
+def abrir_modal(tipo, gerenciador):
+    try:
+        modal = ModalCadastro(tipo, gerenciador)
+        resultado = modal.exec()
+        print("Resultado do modal:", resultado)
+    except Exception as e:
+        print("Erro ao abrir modal:", e)
+
     

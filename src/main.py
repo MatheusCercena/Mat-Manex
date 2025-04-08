@@ -1,17 +1,12 @@
 import sys
-from PyQt6.QtWidgets import QApplication 
+from PyQt6.QtWidgets import QApplication
+from UI.main_gui import criar_main_window
 
-app = QApplication(sys.argv)
-
-from main_gui import main_window
-
-main_window.show()
-
-sys.exit(app.exec())
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    main_window = criar_main_window()
+    main_window.show()
+    sys.exit(app.exec())
 
 
-# if __name__ == "__main__":
-#     Menu.saudacao()
-#     menu = Menu()
-#     menu.ver_menu_principal()
 

@@ -1,5 +1,5 @@
 import json
-from transação import Transação
+from utils.transação import Transação
 
 class GerenciadorFinanças:
     def __init__(self, arquivo_json = 'data.json'):
@@ -10,25 +10,26 @@ class GerenciadorFinanças:
         try:
             with open(self.arquivo_json, "r") as file:
                 transações = json.load(file)
-            return [Transação(**t) for t in transações]  # Retorna uma lista de objetos Transação por passar os elementos do dicionario t como parametros da funcao                   
+            return [Transação(**t) for t in transações]  # Retorna uma lista de objetos chamados Transação por passar os elementos do dicionario t como parametros da funcao                   
         except (FileNotFoundError, json.JSONDecodeError):
             return []
 
     def salvar_transações(self):
         with open(self.arquivo_json, "w") as file:
             json.dump([t.to_dict() for t in self.lista_de_transações], file)
-    # def cadastrar_transação(self, tipo):
-    #     data = input('Data (Enter para hoje): ')
-    #     valor = input('Valor: ')
-    #     categoria = input('Categoria: ')
-    #     origem = input('Pagante/Favorecido: ')
-    #     observacoes = input('Observações: ')
+            
+    def cadastrar_transação(self, tipo):
+        data = input('Data (Enter para hoje): ')
+        valor = input('Valor: ')
+        categoria = input('Categoria: ')
+        origem = input('Pagante/Favorecido: ')
+        observacoes = input('Observações: ')
 
-    #     transação = Transação(tipo, data, valor, categoria, origem, observacoes)
-    #     transação.id = len(self.lista_de_transações) + 1
-    #     self.lista_de_transações.append(transação)
-    #     self.salvar_transações()
-    #     print(f'{tipo} cadastrado com sucesso!')
+        transação = Transação(tipo, data, valor, categoria, origem, observacoes)
+        transação.id = len(self.lista_de_transações) + 1
+        self.lista_de_transações.append(transação)
+        self.salvar_transações()
+        print(f'{tipo} cadastrado com sucesso!')
 
     def ver_lista(self):
         print('\nLista de transações: \n')
@@ -39,8 +40,9 @@ class GerenciadorFinanças:
         saldo = 0
         for transação in self.lista_de_transações:
             saldo += float(transação.valor)
-            GerenciadorFinanças.separador()
+        GerenciadorFinanças.separador()
         print(f"Saldo atual: {saldo:.2f}")
+        GerenciadorFinanças.separador()
 
     def ver_categorias(self):
         categorias = set()
