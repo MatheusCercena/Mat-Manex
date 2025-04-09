@@ -1,10 +1,11 @@
 from PyQt6.QtWidgets import QDialog, QLineEdit, QVBoxLayout, QLabel, QPushButton
 from utils.transação import Transação
+from utils.gerenciador import GerenciadorFinanças
 
 class ModalCadastro(QDialog):
-    def __init__(self, tipo, gerenciador):
+    def __init__(self, tipo):
         super().__init__()
-        self.gerenciador = gerenciador
+        self.gerenciador = GerenciadorFinanças()
         self.tipo = tipo
 
         self.setWindowTitle(f'Cadastrar {tipo}')
@@ -18,7 +19,7 @@ class ModalCadastro(QDialog):
         self.input_observacoes = QLineEdit(self)
 
         btn_confirmar = QPushButton("Cadastrar", self)
-        btn_confirmar.clicked.connect(self.cadastrar_transação)
+        btn_confirmar.clicked.connect(GerenciadorFinanças.cadastrar_transação('Recebimento'))
 
         layout = QVBoxLayout()
         layout.addWidget(QLabel('Data (Enter para hoje): '))
@@ -35,27 +36,6 @@ class ModalCadastro(QDialog):
 
         self.setLayout(layout)
 
-    def cadastrar_transação(self):
-        tipo = self.tipo
-        data = self.input_data.text()
-        valor = self.input_valor.text()
-        categoria = self.input_categoria.text()
-        origem = self.input_origem.text()
-        observacoes = self.input_observacoes.text()
 
-        transação = Transação(tipo, data, valor, categoria, origem, observacoes)
-        transação.id = len(self.gerenciador.lista_de_transações) + 1
-        self.gerenciador.lista_de_transações.append(transação)
-        self.gerenciador.salvar_transações()
-        print(f'{tipo} cadastrado com sucesso!')
-        self.accept()
-
-def abrir_modal(tipo, gerenciador):
-    try:
-        modal = ModalCadastro(tipo, gerenciador)
-        resultado = modal.exec()
-        print("Resultado do modal:", resultado)
-    except Exception as e:
-        print("Erro ao abrir modal:", e)
 
     

@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QPushButton
 from utils.menus import menu_principal, sub_menuEstatisticas
 from utils.gerenciador import GerenciadorFinanças
+from UI.modal_cadastro import ModalCadastro
 
 def criar_main_window():
     gerenciador = GerenciadorFinanças()
@@ -15,7 +16,7 @@ def criar_main_window():
 
     btn_cad_rec = QPushButton('Cadastrar receita', main_window)
     btn_cad_rec.setGeometry(100, 0, 150, 100)
-    btn_cad_rec.clicked.connect(lambda: gerenciador.cadastrar_transação('Recebimento'))
+    btn_cad_rec.clicked.connect(lambda: abrir_modal('Recebimento'))
 
     btn_cad_desp = QPushButton('Cadastrar despesa', main_window)
     btn_cad_desp.setGeometry(250, 0, 150, 100)
@@ -42,3 +43,7 @@ def criar_main_window():
     btn_config.clicked.connect(lambda: print("Configuração em desenvolvimento"))
 
     return main_window
+
+def abrir_modal(tipo):
+    modal = ModalCadastro(tipo)
+    modal.exec()
