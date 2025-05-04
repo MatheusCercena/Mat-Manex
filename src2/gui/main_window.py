@@ -3,52 +3,45 @@ from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QToolBar, QPushB
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtCore import Qt, QSize
 
-# from src_terminal.utils import gerenciador
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setWindowIcon(QIcon('media/icons/logo.ico'))
+        self.setWindowTitle('Mat-Manex')
 
-        toolbar = QToolBar()
-        self.addToolBar(toolbar)
-        toolbar.setIconSize(QSize(16, 16))
+        self.toolbar = QToolBar()
+        self.addToolBar(self.toolbar)
+        self.toolbar.setIconSize(QSize(16, 16))
 
-        btn_inicio = QAction('Início')
-        btn_inicio.triggered.connect(lambda: print("Configuração em desenvolvimento"))
+        self.criar_botoes_toolbar()
+        self.definir_estilo_da_toolbar()
 
-        btn_cad_rec = QAction(QIcon('..media/images/logo_mat-manex.png'), 'Cadastrar receita')
-        btn_cad_rec.triggered.connect(lambda: print('Recebimento'))
+    def criar_botoes_toolbar(self):
+        self.botoes = [
+                {'Path' : 'media/icons/logo.ico', 'Nome' : 'Inicio', 'Funcao' : "Configuração em desenvolvimento"},
+                {'Path' : 'media/icons/logo.ico', 'Nome' : 'Cadastrar receita', 'Funcao' : "Recebimento"},
+                {'Path' : 'media/icons/logo.ico', 'Nome' : 'Cadastrar despesa', 'Funcao' : "Pagamento"},
+                {'Path' : 'media/icons/logo.ico', 'Nome' : 'Categorias', 'Funcao' : "gerenciador.ver_categorias()"},
+                {'Path' : 'media/icons/logo.ico', 'Nome' : 'Favorecidos/Pagantes', 'Funcao' : "gerenciador.ver_origens()"},
+                {'Path' : 'media/icons/logo.ico', 'Nome' : 'Lista de Transações', 'Funcao' : "gerenciador.ver_lista()"},
+                {'Path' : 'media/icons/logo.ico', 'Nome' : 'Estatísticas', 'Funcao' : "sub_menuEstatisticas"},
+                {'Path' : 'media/icons/logo.ico', 'Nome' : 'Configurações', 'Funcao' : 'Configuração em desenvolvimento'}
+             ]
+        
+        for botao in self.botoes:
+            acao = QAction(QIcon(botao['Path']), botao['Nome'], self)
+            acao.triggered.connect(lambda _, comando = botao['Funcao']: print(comando))
+            self.toolbar.addAction(acao)
 
-        btn_cad_desp = QAction(QIcon('..media/images/logo_mat-manex.png'), 'Cadastrar despesa')
-        btn_cad_desp.triggered.connect(lambda: print('Pagamento'))
-                                     
-        btn_categ = QAction(QIcon('..media/images/logo_mat-manex.png'), 'Categorias')
-        btn_categ.triggered.connect(lambda: print('gerenciador.ver_categorias()'))
-
-        btn_fav = QAction(QIcon('..media/images/logo_mat-manex.png'), 'Favorecidos/Pagantes')
-        btn_fav.triggered.connect(lambda: print('gerenciador.ver_origens()'))
-
-        btn_list = QAction(QIcon('..media/images/logo_mat-manex.png'), 'Lista de Transações')
-        btn_list.triggered.connect(lambda: print('gerenciador.ver_lista()'))
-
-        btn_estat = QAction(QIcon('..media/images/logo_mat-manex.png'), 'Estatísticas')
-        btn_estat.triggered.connect(lambda: print('sub_menuEstatisticas()'))
-                                  
-        btn_config = QAction(QIcon('..media/images/logo_mat-manex.png'), 'Configurações')
-        btn_config.triggered.connect(lambda: print("Configuração em desenvolvimento"))
-
-        toolbar.addAction(btn_inicio)
-        toolbar.addAction(btn_cad_rec)
-        toolbar.addAction(btn_cad_desp)
-        toolbar.addAction(btn_categ)
-        toolbar.addAction(btn_fav)
-        toolbar.addAction(btn_list)
-        toolbar.addAction(btn_estat)
-        toolbar.addAction(btn_config)
-
-
-        self.setStatusBar(QStatusBar(self))
-
+        
+    def definir_estilo_da_toolbar(self):
+        tamanho_toolbar = 850
+        tamanho_tela  = self.size()#continuar, tá errado
+        print(tamanho_tela)
+        if tamanho_tela > tamanho_toolbar:
+            self.toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextOnly)
+        else:
+            self.toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
 
 
 
