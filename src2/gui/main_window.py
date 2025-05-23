@@ -14,7 +14,7 @@ class MainWindow(QMainWindow):
         self.toolbar.setIconSize(QSize(16, 16))
 
         self.criar_botoes_toolbar()
-        self.definir_estilo_da_toolbar()
+        self.toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextOnly)
 
     def criar_botoes_toolbar(self):
         self.botoes = [
@@ -32,17 +32,6 @@ class MainWindow(QMainWindow):
             acao = QAction(QIcon(botao['Path']), botao['Nome'], self)
             acao.triggered.connect(lambda _, comando = botao['Funcao']: print(comando))
             self.toolbar.addAction(acao)
-
-        
-    def definir_estilo_da_toolbar(self):
-        tamanho_toolbar = 850
-        tamanho_tela  = self.size()#continuar, tá errado
-        print(tamanho_tela)
-        if tamanho_tela > tamanho_toolbar:
-            self.toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextOnly)
-        else:
-            self.toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
-
 
 
 if __name__ == "__main__":
